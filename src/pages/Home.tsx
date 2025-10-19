@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { loadArt } from "../lib/content";
 
 type Art = {
@@ -15,14 +15,14 @@ type Art = {
 
 function Home() {
     const [artworks, setArtworks] = useState<Art[]>([]);
-    const [selected, setSelected] = useState<Art | null>(null);
-    
+    //const [selected, setSelected] = useState<Art | null>(null);
+
     useEffect(() => {
         loadArt().then(setArtworks).catch(console.error);
     }, []);
 
-    const handleSelect = (art: Art) => setSelected(art);
-    const handleClose = () => setSelected(null);
+    //const handleSelect = (art: Art) => setSelected(art);
+    //const handleClose = () => setSelected(null);
 
     return (
         <div className="main">
@@ -37,10 +37,8 @@ function Home() {
                     <article
                     key={art.title}
                     className="card"
-                    onClick={() => handleSelect(art)}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && handleSelect(art)}
                     >
                     <img
                         src={art.image}
