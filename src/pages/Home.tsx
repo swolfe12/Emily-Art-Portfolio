@@ -17,10 +17,14 @@ function Home() {
     const [artworks, setArtworks] = useState<Art[]>([]);
     //const [selected, setSelected] = useState<Art | null>(null);
 
-    useEffect(() => {
+    /*useEffect(() => {
         loadArt().then(setArtworks).catch(console.error);
     }, []);
-
+*/
+useEffect(() => {
+    // sync now
+    setArtworks(loadArt());
+  }, []);
     //const handleSelect = (art: Art) => setSelected(art);
     //const handleClose = () => setSelected(null);
 
