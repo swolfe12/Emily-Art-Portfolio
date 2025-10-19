@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"     # where files are stored in repo
+public_folder: "/uploads"          # how the site references them
+
+collections:
+  - name: "art"
+    label: "Artwork"
+    folder: "content/art"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Hero Image", name: "image", widget: "image" }
+      - { label: "Alt Text", name: "alt", widget: "string" }
+      - { label: "Medium", name: "medium", widget: "string", required: false }
+      - { label: "Dimensions", name: "dimensions", widget: "string", required: false }
+      - { label: "Price", name: "price", widget: "string", required: false }
+      - { label: "For Sale?", name: "forSale", widget: "boolean", default: false }
+      - { label: "Description", name: "body", widget: "markdown", required: false }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home"
+        name: "home"
+        file: "content/pages/home.md"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Subheading", name: "subheading", widget: "string", required: false }
+          - { label: "Intro", name: "body", widget: "markdown", required: false }
+      - label: "About"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - { label: "Bio", name: "body", widget: "markdown" }
+          - { label: "Portrait", name: "portrait", widget: "image", required: false }
+
+publish_mode: editorial_workflow   # optional: adds draft/review/publish
