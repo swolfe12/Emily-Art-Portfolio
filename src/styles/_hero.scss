@@ -5,21 +5,34 @@
     padding-block: 40px;
     @media(max-width: 900px){
         padding-block: 20px;
+        height: 600px;
     }
     h1 {
         text-align: center;
-        width: 50%;
+        //width: 50%;
+        font-size: 90px;
         letter-spacing: 0.12em;
+
         @media(max-width: 900px){
-            width: 90%;
+            width: 80%;
+            font-size: 50px;
+            text-align: left;
+            line-height: 1;
         }
     }
     .left-img {
         position: absolute;
-        height: 300px;
-        top: 50%;
-        left: 0%;
-        display:none;
+        height: 500px;
+        top: 25%;
+        left: 35%;
+        z-index: -1;
+        opacity: .6;    
+        //display:none;
+        @media(max-width: 900px){
+            top: 60%;
+            left: 60%;
+            height: 300px;
+        }
     }
     .right-img {
         position: absolute;
