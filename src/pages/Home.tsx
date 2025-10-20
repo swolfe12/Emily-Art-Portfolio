@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { loadArt } from "../lib/content";
+import Nav from "../Nav";
+import flowers from '../assets/flowers.png';
+
 
 type Art = {
   title: string;
@@ -29,8 +32,15 @@ useEffect(() => {
     //const handleClose = () => setSelected(null);
 
     return (
+        <>
+        <Nav/>
         <div className="main">
-            <h1>Emily's Art Portfolio</h1>
+            <div className="hero">
+                 <h1>Some Big Words About Emily's Art Portfolio</h1>
+                 <img className="left-img" src={flowers}></img>
+                 <img className="right-img" src={flowers}></img>
+            </div>
+           
             <div className="gallery">
                 <h2>My Work</h2>
                 {artworks.length === 0 ? (
@@ -60,6 +70,7 @@ useEffect(() => {
             )}
             </div>
         </div>
+        </>
     )
 }
 

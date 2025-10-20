@@ -1,0 +1,31 @@
+.hero {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    padding-block: 40px;
+    @media(max-width: 900px){
+        padding-block: 20px;
+    }
+    h1 {
+        text-align: center;
+        width: 50%;
+        letter-spacing: 0.12em;
+        @media(max-width: 900px){
+            width: 90%;
+        }
+    }
+    .left-img {
+        position: absolute;
+        height: 300px;
+        top: 50%;
+        left: 0%;
+        display:none;
+    }
+    .right-img {
+        position: absolute;
+        height: 350px;
+        right: 0;
+        top: 30%;
+        display:none;
+    }
+}
