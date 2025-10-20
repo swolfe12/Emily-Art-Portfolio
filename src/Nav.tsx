@@ -27,8 +27,6 @@ export default function Nav({
   leftBlurbLines = ["RESULTS DRIVEN", "ADVERTISING & SOCIAL", "MEDIA MARKETING"],
   rightBlurbLines = ["EST. 2001", "DALAS,", "TEXAS"],
   items = DEFAULT_ITEMS,
-  cartCount = 0,
-  onCartClick,
 }: NavProps) {
   const [open, setOpen] = useState(false);
 
