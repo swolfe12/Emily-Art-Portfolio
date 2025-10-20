@@ -14,11 +14,11 @@ type NavProps = {
 };
 
 const DEFAULT_ITEMS: NavItem[] = [
-  { label: "CASE STUDIES", href: "/case-studies" },
-  { label: "SERVICES", href: "/services" },
-  { label: "ABOUT US", href: "/about" },
-  { label: "JOURNAL", href: "/journal" },
-  { label: "CONTACT", href: "/contact" },
+  { label: "HOME", href: "/" },
+  { label: "ABOUT", href: "/#about" },
+  { label: "WORK", href: "/work" },
+  { label: "PROCESS", href: "/process" },
+  { label: "CONTACT", href: "/#contact" },
 ];
 
 export default function Nav({

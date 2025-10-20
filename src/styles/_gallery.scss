@@ -1,7 +1,16 @@
-.gallery {
-margin-inline: 50px;
-.grid {
-    width: 100%;
-}
 
-}
+.gallery {
+    margin-inline: 50px;
+        .grid {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            .card {
+                width: 50%;
+                overflow: hidden;
+                img {
+                    height: 300px;
+                }
+            }
+        }
+    }

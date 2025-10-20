@@ -1,15 +1,3 @@
 .main {
-    .gallery {
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            .card {
-                width: 50%;
-                overflow: hidden;
-                img {
-                    height: 300px;
-                }
-            }
-        }
-    }
+    margin-inline: 50px;
 }
