@@ -2,7 +2,7 @@
 @import './_home.scss';
 @import './nav.scss';
 @import './hero.scss';
-
+@import './gallery';
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 body {
@@ -16,5 +16,22 @@ h1 {
     font-size: 70px;
     @media (max-width: 900px){
         font-size:50px;
+    }
+}
+h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 200;
+    font-size: 40px;
+    width: 60%;
+    border-bottom: 1px solid black;
+    @media (max-width: 900px){
+        font-size:30px;
+    }
+    &.left {
+        border-bottom: 1px solid black;
+    }
+    &.right {
+        text-align: right;
+        float: right;
     }
 }

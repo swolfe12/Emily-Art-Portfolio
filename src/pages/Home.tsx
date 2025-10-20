@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { loadArt } from "../lib/content";
 import Nav from "../Nav";
-import flowers from '../assets/flowers.png';
-
+import flowers from "../assets/flowers.png";
 
 type Art = {
   title: string;
   date: string;
   image: string;
   alt?: string;
-  medium?: string;
+  medium?: string;     // e.g., "Charcoal", "Photography", "Oil", etc.
   dimensions?: string;
   price?: string;
   forSale?: boolean;
@@ -17,61 +16,76 @@ type Art = {
 };
 
 function Home() {
-    const [artworks, setArtworks] = useState<Art[]>([]);
-    //const [selected, setSelected] = useState<Art | null>(null);
+  const [artworks, setArtworks] = useState<Art[]>([]);
 
-    /*useEffect(() => {
-        loadArt().then(setArtworks).catch(console.error);
-    }, []);
-*/
-useEffect(() => {
-    // sync now
-    setArtworks(loadArt());
+  useEffect(() => {
+    setArtworks(loadArt()); // sync load (your current approach)
   }, []);
-    //const handleSelect = (art: Art) => setSelected(art);
-    //const handleClose = () => setSelected(null);
 
-    return (
-        <>
-        <Nav/>
-        <div className="main">
-            <div className="hero">
-                 <h1>Some Big Words About Emily's Art Portfolio</h1>
-                 <img className="left-img" src={flowers}></img>
-                 <img className="right-img" src={flowers}></img>
-            </div>
-           
-            <div className="gallery">
-                <h2>My Work</h2>
-                {artworks.length === 0 ? (
-                <p className="loading">Loading artworks...</p>
-            ) : (
+  // --- group by medium ---
+  const groupedByMedium = useMemo(() => {
+    const by: Record<string, Art[]> = {};
+    for (const art of artworks) {
+      const key = (art.medium?.trim() || "Uncategorized");
+      (by[key] ||= []).push(art);
+    }
+    return by;
+  }, [artworks]);
+
+  // Optional: control section order (others follow alphabetically)
+  const preferredOrder = ["Charcoal", "Photography", "Oil", "Acrylic", "Watercolor", "Ink", "Digital"];
+  const sectionKeys = useMemo(() => {
+    const all = Object.keys(groupedByMedium);
+    const orderedFirst = preferredOrder.filter((k) => all.includes(k));
+    const remaining = all.filter((k) => !preferredOrder.includes(k)).sort((a, b) => a.localeCompare(b));
+    return [...orderedFirst, ...remaining];
+  }, [groupedByMedium]);
+
+  return (
+    <>
+      <Nav />
+      <div className="main">
+        <div className="hero">
+          <h1>Some Big Words About Emily&apos;s Art Portfolio</h1>
+          <img className="left-img" src={flowers} alt="" />
+          <img className="right-img" src={flowers} alt="" />
+        </div>
+
+        <div className="gallery">
+          {artworks.length === 0 ? (
+            <p className="loading">Loading artworks...</p>
+          ) : (
+            sectionKeys.map((mediumKey, idx) => (
+              <section key={mediumKey} className="medium-section">
+                <h2 className={idx % 2 === 0 ? "left" : "right"}>{mediumKey}</h2>
                 <div className="grid">
-                {artworks.map((art) => (
+                  {groupedByMedium[mediumKey].map((art) => (
                     <article
-                    key={art.title}
-                    className="card"
-                    role="button"
-                    tabIndex={0}
+                      key={`${mediumKey}-${art.title}`}
+                      className="card"
+                      role="button"
+                      tabIndex={0}
                     >
-                    <img
+                      <img
                         src={art.image}
                         alt={art.alt || art.title}
                         loading="lazy"
-                    />
-                    <div className="info">
-                        <h2>{art.title}</h2>
+                      />
+                      <div className="info">
+                        <h3>{art.title}</h3>
                         {art.medium && <p className="medium">{art.medium}</p>}
                         {art.forSale && <span className="tag for-sale">For Sale</span>}
-                    </div>
+                      </div>
                     </article>
-                ))}
+                  ))}
                 </div>
-            )}
-            </div>
+              </section>
+            ))
+          )}
         </div>
-        </>
-    )
+      </div>
+    </>
+  );
 }
 
 export default Home;
