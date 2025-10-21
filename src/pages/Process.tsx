@@ -1,7 +1,9 @@
+import Nav from "../Nav";
 function Process (){
     return (
         <>
-        <h1>Process Page</h1>
+        <Nav/>
+        <h2>Process</h2>
         </>
     )
 }
